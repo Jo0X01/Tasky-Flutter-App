@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:tasky_app/auth/widgets/text_form_field_with_label_custom_widget.dart';
+import 'package:tasky_app/screens/auth/view/register_screen.dart';
+import 'package:tasky_app/screens/auth/widgets/text_form_field_with_label_custom_widget.dart';
 import 'package:tasky_app/utils/validator.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  static const String routeName = "RegisterScreen";
+  static const String routeName = "LoginScreen";
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
-  var usernameController = TextEditingController();
   var loginFormKey = GlobalKey<FormState>();
 
   @override
@@ -30,30 +29,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 97,),
+              SizedBox(height: 122,),
               Text(
-                "Register",
+                "Login",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff24252C),
                 ),
               ),
-              SizedBox(height: 23,),
-              TextFormFieldWithLabelCustomWidget(
-                controller: usernameController,
-                validator: Validator.validateName,
-                labelText: "Username",
-                hintText: "enter username",
-              ),
-              SizedBox(height: 11,),
+              SizedBox(height: 53,),
               TextFormFieldWithLabelCustomWidget(
                 controller: emailController,
                 validator: Validator.validateEmail,
                 labelText: "Email",
                 hintText: "enter username",
               ),
-              SizedBox(height: 11,),
+              SizedBox(height: 26,),
               TextFormFieldWithLabelCustomWidget(
                 controller: passwordController,
                 validator: Validator.validatePassword,
@@ -62,16 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 isPassword: true,
                 obscureText: true,
               ),
-              SizedBox(height: 11,),
-              TextFormFieldWithLabelCustomWidget(
-                controller: confirmPasswordController,
-                validator: Validator.validatePassword,
-                labelText: "Confirm Password",
-                hintText: "Password...",
-                isPassword: true,
-                obscureText: true,
-              ),
-              SizedBox(height: 75,),
+              SizedBox(height: 71,),
               MaterialButton(
                 onPressed: () {
                   if (loginFormKey.currentState!.validate()) {}
@@ -85,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
                 child: Text(
-                  "Register",
+                  "Login",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -101,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         padding: EdgeInsets.symmetric(vertical: 30),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(RegisterScreen.routeName);
           },
           child: RichText(
             textAlign: TextAlign.center,
@@ -112,9 +95,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 color: Color(0xff6E6A7C),
               ),
               children: [
-                TextSpan(text: "Already have an account? "),
+                TextSpan(text: "Don’t have an account? "),
                 TextSpan(
-                  text: "Login",
+                  text: "Register",
                   style: TextStyle(color: Color(0xff5F33E1)),
                 ),
               ],

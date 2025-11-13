@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:tasky_app/auth/view/register_screen.dart';
-import 'package:tasky_app/auth/widgets/text_form_field_with_label_custom_widget.dart';
+import 'package:tasky_app/screens/auth/widgets/text_form_field_with_label_custom_widget.dart';
 import 'package:tasky_app/utils/validator.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
-  static const String routeName = "LoginScreen";
+  static const String routeName = "RegisterScreen";
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+  var usernameController = TextEditingController();
   var loginFormKey = GlobalKey<FormState>();
 
   @override
@@ -29,23 +30,30 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 122,),
+              SizedBox(height: 97,),
               Text(
-                "Login",
+                "Register",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff24252C),
                 ),
               ),
-              SizedBox(height: 53,),
+              SizedBox(height: 23,),
+              TextFormFieldWithLabelCustomWidget(
+                controller: usernameController,
+                validator: Validator.validateName,
+                labelText: "Username",
+                hintText: "enter username",
+              ),
+              SizedBox(height: 11,),
               TextFormFieldWithLabelCustomWidget(
                 controller: emailController,
                 validator: Validator.validateEmail,
                 labelText: "Email",
                 hintText: "enter username",
               ),
-              SizedBox(height: 26,),
+              SizedBox(height: 11,),
               TextFormFieldWithLabelCustomWidget(
                 controller: passwordController,
                 validator: Validator.validatePassword,
@@ -54,7 +62,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPassword: true,
                 obscureText: true,
               ),
-              SizedBox(height: 71,),
+              SizedBox(height: 11,),
+              TextFormFieldWithLabelCustomWidget(
+                controller: confirmPasswordController,
+                validator: Validator.validatePassword,
+                labelText: "Confirm Password",
+                hintText: "Password...",
+                isPassword: true,
+                obscureText: true,
+              ),
+              SizedBox(height: 75,),
               MaterialButton(
                 onPressed: () {
                   if (loginFormKey.currentState!.validate()) {}
@@ -68,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
                 child: Text(
-                  "Login",
+                  "Register",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -84,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.symmetric(vertical: 30),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed(RegisterScreen.routeName);
+            Navigator.of(context).pop();
           },
           child: RichText(
             textAlign: TextAlign.center,
@@ -95,9 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Color(0xff6E6A7C),
               ),
               children: [
-                TextSpan(text: "Don’t have an account? "),
+                TextSpan(text: "Already have an account? "),
                 TextSpan(
-                  text: "Register",
+                  text: "Login",
                   style: TextStyle(color: Color(0xff5F33E1)),
                 ),
               ],
